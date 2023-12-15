@@ -1,6 +1,7 @@
 package org.tienda;
 
-import java.nio.channels.FileLock;
+import org.tienda.model.Product;
+
 import java.util.*;
 
 //crear un sistema de objetos que nos permita cargar obtos typo producto
@@ -8,9 +9,23 @@ import java.util.*;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public  static Scanner scanner = new Scanner(System.in);
-    static List<Producto> productos = new ArrayList<>();
+    static List<Product> products = new ArrayList<>();
 
     public static void main(String[] args) {
+        //prueba intancia de la clase producto
+
+        Product p1 = new Product("cocacola", 10, "botella de gaseosa de vidrio 80ml", "bebidas", "gaseosas", 3400);
+        products.add(p1);
+        double valorParaCompararPrecio = 3000;
+        int romperStock = 11;
+        String palabra = "Cocacola";
+        System.out.println("------funciones nuevas------");
+
+        System.out.println(p1.esPrecioMayorOMenor(valorParaCompararPrecio, p1.getPrice()));
+        System.out.println(p1.countStock(romperStock, p1.getStock()));
+        System.out.println(p1.contienePalabra(palabra, p1.getName()));
+
+
         runMenu();
     }
 
@@ -21,6 +36,7 @@ public class Main {
             choice = scanner.nextInt();
             handleUserChoice(choice);
         }while (choice != 5);
+        runMenu();
     }
 
     private static void displayMenu(){
@@ -64,6 +80,8 @@ public class Main {
         scanner.nextLine();
         System.out.println("ingrese el nombre del producto: ");
         String nombreProducto = scanner.nextLine();
+        System.out.println("ingrese la cantidad de productos disponibles en inventario : ");
+        int inventario = scanner.nextInt();
         System.out.println("ingrese la descripcion del producto: ");
         String descripcion = scanner.nextLine();
         System.out.println("ingrese la categoria del producto. ");
@@ -72,73 +90,78 @@ public class Main {
         String etiqueta = scanner.nextLine();
         System.out.println("ingrese el precio del producto: ");
         long precioProducto = scanner.nextInt();
-        Producto nuevoProducto = new Producto(nombreProducto,descripcion,categoria, etiqueta,precioProducto);
-        productos.add(nuevoProducto);
-        System.out.println(nuevoProducto.toString());
+        Product nuevoProduct = new Product(nombreProducto, inventario, descripcion,categoria, etiqueta,precioProducto);
+        products.add(nuevoProduct);
+        System.out.println("Producto agredado correctamente");;
     }
 
     private static void deleteProduct(){
         int pDelete;
         System.out.println("elija el codigo del producto a eliminar: ");
         //muestro los productos
-        for(Producto p : productos){
+        for(Product p : products){
             System.out.println(p);
         }
         //eligo un codigo identificador y lo guardo aca
         pDelete = scanner.nextInt();
         //voy a busca el id entre al lista de productos
-        for (int i = 0; i < productos.size(); i++) {
-            if(productos.get(i).getIdentificadorProducto() == pDelete){
-                productos.remove(i);
+        for (int i = 0; i < products.size(); i++) {
+            if(products.get(i).getIdProduct() == pDelete){
+                products.remove(i);
                 System.out.println("producto borrado.");
                 break;
             }
         }
 
         System.out.println("la lista de producto es: ");
-        for(Producto p : productos){
+        for(Product p : products){
             System.out.println(p);
         }
     }
 
     private static void allProducts(){
             System.out.println("los producto en el inventarios son: ");
-            for(Producto producto : productos){
-                System.out.println(producto);
+            for(Product product : products){
+                System.out.println(product);
             }
     }
 
     private static void editProduct(){
         System.out.println("los productos disponibles para editar son : ");
-        for(Producto p : productos){
+        for(Product p : products){
             System.out.println(p);
         }
         System.out.println("ingrese el codigo del producto a editar: ");
-        for (int i = 0; i < productos.size(); i++) {
+        for (int i = 0; i < products.size(); i++) {
             int pEdit = scanner.nextInt();
-            if(productos.get(i).getIdentificadorProducto() ==   pEdit){
+            if(products.get(i).getIdProduct() ==   pEdit){
 
                 System.out.println("ingrese el nuevo nombre: ");
                 String newName = scanner.next();
-                productos.get(i).setName(newName);
+                products.get(i).setName(newName);
+
+                System.out.println("ingrese la cantidad e existencia en inventario: ");
+                int inventario = scanner.nextInt();
+                products.get(i).setStock(inventario);
+
 
                 scanner.nextLine();
                 System.out.println("ingrese la nueva descripcion: ");
                 String newDescripcion = scanner.nextLine();
-                productos.get(i).setDescripcion(newDescripcion);
+                products.get(i).setDescription(newDescripcion);
 
 
                 System.out.println("ingrese la nueva categoria: ");
                 String newCategoria = scanner.nextLine();
-                productos.get(i).setCategoria(newCategoria);
+                products.get(i).setCategory(newCategoria);
 
                 System.out.println("ingrese la nueva etiqueta: ");
                 String newEtiqueta = scanner.nextLine();
-                productos.get(i).setEtiqueta(newEtiqueta);
+                products.get(i).setTags(newEtiqueta);
 
                 System.out.println("ingrese el nuevo precio: ");
                 float newPrice = scanner.nextFloat();
-                productos.get(i).setPrecio(newPrice);
+                products.get(i).setPrice(newPrice);
 
                 scanner.nextLine();
 
