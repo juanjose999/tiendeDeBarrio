@@ -24,7 +24,7 @@ public class Producto {
     public void setIdentificadorProducto(int identificadorProducto){
         this.identificadorProducto = identificadorProducto;
     }
-    public String getName(String newName) {
+    public String getName() {
         return name;
     }
 

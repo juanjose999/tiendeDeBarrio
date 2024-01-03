@@ -11,6 +11,9 @@ public class Main {
     static List<Producto> productos = new ArrayList<>();
 
     public static void main(String[] args) {
+        ProductsArray arregloProductos = new ProductsArray();
+        arregloProductos.cargarProducts();
+        System.out.println(arregloProductos);
         runMenu();
     }
 
@@ -143,7 +146,6 @@ public class Main {
                 scanner.nextLine();
 
                 System.out.println("producto actualizado");
-
             }
         }
     }
