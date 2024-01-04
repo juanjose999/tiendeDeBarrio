@@ -1,5 +1,7 @@
 package org.tienda;
 
+import java.util.Date;
+
 public class Producto {
     private static int contadorProducto = 1;
     private int identificadorProducto;
@@ -8,6 +10,7 @@ public class Producto {
     private String categoria;
     private String etiqueta;
     private float precio;
+    private Date fechaCreacion;
 
     public Producto( String name, String descripcion, String categoria, String etiqueta, float precio) {
         this.identificadorProducto = contadorProducto++;
@@ -16,6 +19,7 @@ public class Producto {
         this.categoria = categoria;
         this.etiqueta = etiqueta;
         this.precio = precio;
+        this.fechaCreacion = new Date();
     }
 
     public int getIdentificadorProducto(){
@@ -72,7 +76,8 @@ public class Producto {
                 ", descripcion='" + descripcion + '\'' +
                 ", categoria='" + categoria + '\'' +
                 ", etiqueta='" + etiqueta + '\'' +
-                ", precio=" + precio +
+                ", precio=" + precio + '\'' +
+                ", fecha De creacion=" + fechaCreacion+
                 '}';
     }
 }
