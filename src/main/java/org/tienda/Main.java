@@ -15,6 +15,7 @@ public class Main {
         arregloProductos.cargarProducts();
         System.out.println(arregloProductos);
         arregloProductos.buscarLetraInicial('h');
+        arregloProductos.productosEnOrden();
         runMenu();
     }
 
