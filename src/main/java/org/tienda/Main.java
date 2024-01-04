@@ -9,9 +9,10 @@ import java.util.*;
 public class Main {
     public  static Scanner scanner = new Scanner(System.in);
     static List<Producto> productos = new ArrayList<>();
+    public static ProductsArray arregloProductos = new ProductsArray();
+
 
     public static void main(String[] args) {
-        ProductsArray arregloProductos = new ProductsArray();
         arregloProductos.cargarProducts();
         System.out.println(arregloProductos);
         arregloProductos.buscarLetraInicial('h');
@@ -65,21 +66,36 @@ public class Main {
         }
     }
 
-    private static void addProduct(){
-        scanner.nextLine();
-        System.out.println("ingrese el nombre del producto: ");
-        String nombreProducto = scanner.nextLine();
-        System.out.println("ingrese la descripcion del producto: ");
-        String descripcion = scanner.nextLine();
-        System.out.println("ingrese la categoria del producto. ");
-        String categoria = scanner.nextLine();
-        System.out.println("ingrese la etiqueta del producto: ");
-        String etiqueta = scanner.nextLine();
-        System.out.println("ingrese el precio del producto: ");
-        long precioProducto = scanner.nextInt();
-        Producto nuevoProducto = new Producto(nombreProducto,descripcion,categoria, etiqueta,precioProducto);
-        productos.add(nuevoProducto);
-        System.out.println(nuevoProducto.toString());
+    private static void addProduct() {
+        try {
+            scanner.nextLine();
+            System.out.println("Ingrese el nombre del producto: ");
+            String nombreProducto = scanner.nextLine();
+            System.out.println("Ingrese la descripción del producto: ");
+            String descripcion = scanner.nextLine();
+            System.out.println("Ingrese la categoría del producto: ");
+            String categoria = scanner.nextLine();
+            System.out.println("Ingrese la etiqueta del producto: ");
+            String etiqueta = scanner.nextLine();
+            System.out.println("Ingrese el precio del producto: ");
+            float precioProducto = scanner.nextFloat();
+            System.out.println("Ingrese el stock del producto: ");
+            int stock = scanner.nextInt();
+
+            // Verifica si el stock ingresado es válido
+            if (stock < 0) {
+                throw new IllegalArgumentException("El stock no puede ser negativo");
+            }
+
+            Producto nuevoProducto = new Producto(nombreProducto, descripcion, categoria, etiqueta, precioProducto, stock);
+            productos.add(nuevoProducto);
+            System.out.println(nuevoProducto.toString());
+        } catch (InputMismatchException e) {
+            System.out.println("Error: Ingresa un valor válido.");
+            scanner.nextLine(); // Limpia el buffer del scanner
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     private static void deleteProduct(){
