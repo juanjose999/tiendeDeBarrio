@@ -1,8 +1,11 @@
-package org.tienda;
+package org.tienda.model;
+
+import org.tienda.model.Producto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class ProductsArray {
     public static List<Producto> productos;
@@ -41,7 +44,9 @@ public class ProductsArray {
         };
         this.productos.addAll(Arrays.asList(productosPredefinidos));
     }
-    public static void buscarLetraInicial (char letraInicial){
+    public static void buscarLetraInicial (){
+        Scanner input = new Scanner(System.in);
+        char letraInicial = input.next().charAt(0);
         System.out.println("productos que comienzan por la letra " + letraInicial + ": ");
         for (Producto producto: productos){
             if (producto != null && Character.toLowerCase(producto.getName().charAt(0)) == Character.toLowerCase(letraInicial)) {
@@ -69,7 +74,6 @@ public class ProductsArray {
                 resultado.append(producto).append("\n");
             }
         }
-        System.out.println(resultado.toString());
         return resultado.toString();
     }
 }

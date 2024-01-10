@@ -1,6 +1,8 @@
 package org.tienda;
 
-import java.nio.channels.FileLock;
+import org.tienda.model.Producto;
+import org.tienda.model.ProductsArray;
+
 import java.util.*;
 
 //crear un sistema de objetos que nos permita cargar obtos typo producto
@@ -15,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         arregloProductos.cargarProducts();
         System.out.println(arregloProductos);
-        arregloProductos.buscarLetraInicial('h');
+        arregloProductos.buscarLetraInicial();
         arregloProductos.productosEnOrden();
         runMenu();
     }
@@ -62,7 +64,6 @@ public class Main {
             case 4 -> allProducts();
             case 5 -> System.out.println("saliendo...");
             default -> System.out.println("opcion invalida intente de nuevo");
-
         }
     }
 
@@ -123,10 +124,18 @@ public class Main {
     }
 
     private static void allProducts(){
-            System.out.println("los producto en el inventarios son: ");
-            for(Producto producto : productos){
+        System.out.println("Ingrese 1 para ver en orden , 2 para ver en desorde.");
+        int optionNum = scanner.nextInt();
+        if(optionNum==1){
+            ProductsArray.productosEnOrden();
+        }else if(optionNum==2){
+            System.out.println("los producto del inventario en desorden son: ");
+            for(Producto producto : ProductsArray.productos){
                 System.out.println(producto);
             }
+        } else {
+            System.out.println("entreda invalida, ingrese nuevameente.");
+        }
     }
 
     private static void editProduct(){
