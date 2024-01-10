@@ -14,10 +14,6 @@ public class ProductsArray {
         this.productos = new ArrayList<>();
     }
 
-    public void cargarProducts(Producto[] productosPredefinidos){
-        this.productos.addAll(Arrays.asList(productosPredefinidos));
-
-    }
 
     public void cargarProducts() {
         Producto[] productosPredefinidos = {
