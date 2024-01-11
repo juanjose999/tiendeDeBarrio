@@ -10,6 +10,7 @@ public class Producto {
     private String categoria;
     private String etiqueta;
     private float precio;
+
     private Date fechaCreacion;
     private int stock;
 
