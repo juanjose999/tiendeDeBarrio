@@ -9,23 +9,25 @@ public class Producto {
     private String descripcion;
     private String categoria;
     private String etiqueta;
-    private float precio;
+    private double precio;
+    private String img;
 
     private Date fechaCreacion;
     private int stock;
 
 
-    public Producto( String name, String descripcion, String categoria, String etiqueta, float precio) {
+    public Producto( String name, String descripcion, String categoria, String etiqueta, double precio, String img) {
         this.identificadorProducto = contadorProducto++;
         this.name = name;
         this.descripcion = descripcion;
         this.categoria = categoria;
         this.etiqueta = etiqueta;
         this.precio = precio;
+        this.img = img;
         this.fechaCreacion = new Date();
     }
     //constructor con cantidad de stock
-    public Producto( String name, String descripcion, String categoria, String etiqueta, float precio, int stock) {
+    public Producto( String name, String descripcion, String categoria, String etiqueta, double precio, int stock) {
         this.identificadorProducto = contadorProducto++;
         this.name = name;
         this.descripcion = descripcion;
@@ -74,11 +76,11 @@ public class Producto {
         this.etiqueta = etiqueta;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
     public int getStock() {
@@ -91,6 +93,14 @@ public class Producto {
         }else {
             this.stock = stock;
         }
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String countStock(int stock, int pedido) {
@@ -128,9 +138,10 @@ public class Producto {
                 ", descripcion='" + descripcion + '\'' +
                 ", categoria='" + categoria + '\'' +
                 ", etiqueta='" + etiqueta + '\'' +
-                ", precio=" + precio + '\'' +
-                ", fecha De creacion=" + fechaCreacion+
-        ", cantidad disponible  =" + stock +
+                ", precio=" + precio +  // Corregir aquí: quitar el apóstrofe al final
+                ", fecha de creacion=" + fechaCreacion +
+                ", cantidad disponible=" + stock +
                 '}';
     }
+
 }

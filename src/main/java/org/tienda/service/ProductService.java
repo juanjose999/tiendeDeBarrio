@@ -18,9 +18,8 @@ public class ProductService implements ProductServiceI{
 
 
     @Override
-    public void addProduct() {
+    public void addProduct(List<Producto> productos) {
         try {
-            scanner.nextLine();
             System.out.println("Ingrese el nombre del producto: ");
             String nombreProducto = scanner.nextLine();
             System.out.println("Ingrese la descripción del producto: ");
@@ -51,7 +50,7 @@ public class ProductService implements ProductServiceI{
     }
 
     @Override
-    public void deleteProduct() {
+    public void deleteProduct(List<Producto> productos) {
         System.out.println("Lista de productos disponibles: ");
         //muestro los productos
         for(Producto p : ProductsArray.productos){
@@ -76,18 +75,13 @@ public class ProductService implements ProductServiceI{
     }
 
     @Override
-    public void allProducts() {
+    public void allProducts(List<Producto> productos) {
         System.out.println("en orden");
         ProductsArray.productosEnOrden();
-        System.out.println("en desorden");
-        for(Producto producto : ProductsArray.productos){
-            System.out.println(producto);
-
-        }
     }
 
     @Override
-    public void editProducts() {
+    public void editProducts(List<Producto> productos) {
         System.out.println("los productos disponibles para editar son : ");
         for(Producto p : ProductsArray.productos){
             System.out.println(p);
@@ -132,8 +126,24 @@ public class ProductService implements ProductServiceI{
             System.out.println("No se encontro el producto");
         }
     }
+
+    @Override
+    public void addProduct() {
+
+    }
+
+    @Override
+    public void deleteProduct() {
+
+    }
+
     @Override
     public void findById() {
+
+    }
+
+    @Override
+    public void findById(List<Producto> productosLeidos) {
         boolean encontrado = false;
         do {
             System.out.println("Buscador de productos, " +
@@ -172,6 +182,16 @@ public class ProductService implements ProductServiceI{
                     break;
             }
         } while (!encontrado);
+    }
+
+    @Override
+    public void allProducts() {
+
+    }
+
+    @Override
+    public void editProducts() {
+
     }
 
 }
