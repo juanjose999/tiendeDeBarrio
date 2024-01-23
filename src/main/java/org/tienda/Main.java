@@ -22,7 +22,7 @@ public class Main {
         List<Producto> productosLeidos = null;
         try {
             CsvReader csvReader = new CsvReader();
-            productosLeidos = csvReader.readProductsFromCsv("C:\\Users\\Juan Jose\\Desktop\\Programacion\\ejerciciosJava\\tiendaDeBarrio\\tiendaDeBarrio\\resources\\inventory.csv");
+            productosLeidos = csvReader.readProductsFromCsv("C:resources\\inventory.csv");
             arregloProductos.productos = productosLeidos;
         } catch (IOException  e) {
             System.out.println("Error al leer el archivo CSV: " + e.getMessage());
