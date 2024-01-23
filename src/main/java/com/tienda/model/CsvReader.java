@@ -1,8 +1,7 @@
-package org.tienda.service;
+package com.tienda.model;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import org.tienda.model.Producto;
 
 import java.io.FileReader;
 import java.io.IOException;

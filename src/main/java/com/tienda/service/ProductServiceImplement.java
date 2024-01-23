@@ -1,24 +1,20 @@
-package org.tienda.service;
+package com.tienda.service;
 
-import org.tienda.model.Producto;
-import org.tienda.model.ProductsArray;
+import com.tienda.model.Producto;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
-public class ProductService implements ProductServiceI{
+public class ProductServiceImplement implements ProductService {
     public  static Scanner scanner = new Scanner(System.in);
 
-    private static List<Producto> productos;
-    public ProductService(){
-        this.productos = new ArrayList<>();
+    private List<Producto> productos;
+    public ProductServiceImplement(List<Producto> productosLeidos){
+        productos = productosLeidos;
     }
 
 
     @Override
-    public void addProduct(List<Producto> productos) {
+    public void addProduct() {
         try {
             System.out.println("Ingrese el nombre del producto: ");
             String nombreProducto = scanner.nextLine();
@@ -39,7 +35,7 @@ public class ProductService implements ProductServiceI{
             }
 
             Producto nuevoProducto = new Producto(nombreProducto, descripcion, categoria, etiqueta, precioProducto, stock);
-            ProductsArray.productos.add(nuevoProducto);
+            productos.add(nuevoProducto);
             System.out.println(nuevoProducto.toString());
         } catch (InputMismatchException e) {
             System.out.println("Error: Ingresa un valor válido.");
@@ -50,19 +46,19 @@ public class ProductService implements ProductServiceI{
     }
 
     @Override
-    public void deleteProduct(List<Producto> productos) {
+    public void deleteProduct() {
         System.out.println("Lista de productos disponibles: ");
         //muestro los productos
-        for(Producto p : ProductsArray.productos){
+        for(Producto p : productos){
             System.out.println(p);
         }
         System.out.println("Ingrese el codigo del producto a eliminar.");
         int productoId = scanner.nextInt();
 
         boolean productoEncontrado = false;
-        for (int i = 0; i < ProductsArray.productos.size(); i++) {
-            if(ProductsArray.productos.get(i).getIdentificadorProducto() == productoId){
-                ProductsArray.productos.remove(i);
+        for (int i = 0; i < productos.size(); i++) {
+            if(productos.get(i).getIdentificadorProducto() == productoId){
+                productos.remove(i);
                 productoEncontrado =true;
                 System.out.println("Producto eliminado correctamente.");
                 break;
@@ -75,45 +71,58 @@ public class ProductService implements ProductServiceI{
     }
 
     @Override
-    public void allProducts(List<Producto> productos) {
+    public void allProducts() {
         System.out.println("en orden");
-        ProductsArray.productosEnOrden();
+        productosEnOrden(productos);
+    }
+
+    public static void productosEnOrden(List<Producto> productos){
+        Producto[] produstosOrdenadosAlfabeticamente = productos.stream()
+                .filter(producto -> producto != null)
+                .toArray(Producto[]::new);
+
+        Arrays.sort(produstosOrdenadosAlfabeticamente, (p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()));
+
+        System.out.println("lista de productos ordenados alfabeticamente: ");
+        for(Producto producto: produstosOrdenadosAlfabeticamente){
+            System.out.println(producto);
+        }
     }
 
     @Override
-    public void editProducts(List<Producto> productos) {
+    public void editProducts() {
         System.out.println("los productos disponibles para editar son : ");
-        for(Producto p : ProductsArray.productos){
+        for(Producto p : productos){
             System.out.println(p);
         }
         System.out.println("ingrese el codigo del producto a editar: ");
         int pEdit = scanner.nextInt();
 
         boolean productoEncontrado = false;
-        for (int i = 0; i < ProductsArray.productos.size(); i++) {
-            if(ProductsArray.productos.get(i).getIdentificadorProducto() ==   pEdit){
+        for (int i = 0; i < productos.size(); i++) {
+            if(productos.get(i).getIdentificadorProducto() ==   pEdit){
 
                 System.out.println("ingrese el nuevo nombre: ");
                 String newName = scanner.next();
-                ProductsArray.productos.get(i).setName(newName);
+                productos.get(i).setName(newName);
 
                 scanner.nextLine();
                 System.out.println("ingrese la nueva descripcion: ");
                 String newDescripcion = scanner.nextLine();
-                ProductsArray.productos.get(i).setDescripcion(newDescripcion);
+                productos.get(i).setDescripcion(newDescripcion);
 
 
                 System.out.println("ingrese la nueva categoria: ");
                 String newCategoria = scanner.nextLine();
-                ProductsArray.productos.get(i).setCategoria(newCategoria);
+                productos.get(i).setCategoria(newCategoria);
 
                 System.out.println("ingrese la nueva etiqueta: ");
                 String newEtiqueta = scanner.nextLine();
-                ProductsArray.productos.get(i).setEtiqueta(newEtiqueta);
+                productos.get(i).setEtiqueta(newEtiqueta);
 
                 System.out.println("ingrese el nuevo precio: ");
                 float newPrice = scanner.nextFloat();
-                ProductsArray.productos.get(i).setPrecio(newPrice);
+                productos.get(i).setPrecio(newPrice);
 
                 scanner.nextLine();
 
@@ -128,26 +137,11 @@ public class ProductService implements ProductServiceI{
     }
 
     @Override
-    public void addProduct() {
-
-    }
-
-    @Override
-    public void deleteProduct() {
-
-    }
-
-    @Override
     public void findById() {
-
-    }
-
-    @Override
-    public void findById(List<Producto> productosLeidos) {
         boolean encontrado = false;
         do {
-            System.out.println("Buscador de productos, " +
-                    "para buscar por nombre ingrese, 1 \npara buscar por Id ingrese, 2");
+            System.out.println("Buscador de productos: " +
+                    "\npara buscar por nombre ingrese, 1. \npara buscar por Id ingrese, 2");
             int optionBuscar = scanner.nextInt();
             scanner.nextLine(); // Consume el carácter de nueva línea
 
@@ -156,7 +150,7 @@ public class ProductService implements ProductServiceI{
                     System.out.println("Ingrese el nombre del producto");
                     String nombreProductoBuscar = scanner.nextLine();
 
-                    for (Producto producto : ProductsArray.productos) {
+                    for (Producto producto : productos) {
                         if (producto.getName().equalsIgnoreCase(nombreProductoBuscar)) {
                             encontrado = true;
                             System.out.println(producto);
@@ -169,7 +163,7 @@ public class ProductService implements ProductServiceI{
                     int idProductoBuscar = scanner.nextInt();
                     scanner.nextLine(); // Consume el carácter de nueva línea
 
-                    for (Producto producto : ProductsArray.productos) {
+                    for (Producto producto : productos) {
                         if (producto.getIdentificadorProducto() == idProductoBuscar) {
                             encontrado = true;
                             System.out.println(producto);
@@ -184,14 +178,15 @@ public class ProductService implements ProductServiceI{
         } while (!encontrado);
     }
 
-    @Override
-    public void allProducts() {
-
+    public String toString(){
+        StringBuilder resultado = new StringBuilder();
+        for(Producto producto: productos){
+            if(producto!=null){
+                resultado.append(producto).append("\n");
+            }
+        }
+        return resultado.toString();
     }
 
-    @Override
-    public void editProducts() {
-
-    }
 
 }

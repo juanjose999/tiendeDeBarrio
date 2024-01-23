@@ -1,9 +1,8 @@
-package org.tienda;
+package com.tienda;
 
-import org.tienda.model.Producto;
-import org.tienda.model.ProductsArray;
-import org.tienda.service.CsvReader;
-import org.tienda.service.ProductService;
+import com.tienda.model.CsvReader;
+import com.tienda.model.Producto;
+import com.tienda.service.ProductServiceImplement;
 
 import java.io.IOException;
 import java.util.*;
@@ -14,29 +13,30 @@ import java.util.*;
 public class Main {
 
     public  static Scanner scanner = new Scanner(System.in);
-    public static ProductService productService = new ProductService();
-    public static ProductsArray arregloProductos = new ProductsArray();
-
+    public static List<Producto> productosLeidos = null;
+    public static ProductServiceImplement productServiceImplement;
 
     public static void main(String[] args) {
-        List<Producto> productosLeidos = null;
+
         try {
             CsvReader csvReader = new CsvReader();
             productosLeidos = csvReader.readProductsFromCsv("C:resources\\inventory.csv");
-            arregloProductos.productos = productosLeidos;
+
         } catch (IOException  e) {
             System.out.println("Error al leer el archivo CSV: " + e.getMessage());
         }
         //arregloProductos.cargarProducts();
-        runMenu(productosLeidos);
+        productServiceImplement = new ProductServiceImplement(productosLeidos);
+
+        runMenu();
     }
 
-    public static void runMenu(List<Producto> productosLeidos) {
+    public static void runMenu() {
         int choice;
         do {
             displayMenu();
             choice = scanner.nextInt();
-            handleUserChoice(choice, productosLeidos);
+            handleUserChoice(choice, productServiceImplement);
         }while (choice != 6);
     }
 
@@ -66,13 +66,13 @@ public class Main {
 
     }
 
-    public static void handleUserChoice(int choice, List<Producto> productosLeidos){
+    public static void handleUserChoice(int choice, ProductServiceImplement productServiceImplement){
         switch (choice){
-            case 1 -> productService.addProduct(productosLeidos);
-            case 2 -> productService.deleteProduct(productosLeidos);
-            case 3 -> productService.editProducts(productosLeidos);
-            case 4 -> productService.allProducts(productosLeidos);
-            case 5 -> productService.findById(productosLeidos);
+            case 1 -> productServiceImplement.addProduct();
+            case 2 -> productServiceImplement.deleteProduct();
+            case 3 -> productServiceImplement.editProducts();
+            case 4 -> productServiceImplement.allProducts();
+            case 5 -> productServiceImplement.findById();
             case 6 -> System.out.println("saliendo...");
             default -> System.out.println("opcion invalida intente de nuevo");
         }
