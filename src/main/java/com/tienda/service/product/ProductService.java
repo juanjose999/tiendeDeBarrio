@@ -1,4 +1,4 @@
-package com.tienda.service;
+package com.tienda.service.product;
 
 public interface ProductService {
     void addProduct();

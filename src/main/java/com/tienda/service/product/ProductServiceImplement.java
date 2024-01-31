@@ -1,6 +1,6 @@
-package com.tienda.service;
+package com.tienda.service.product;
 
-import com.tienda.model.Producto;
+import com.tienda.model.product.Producto;
 
 import java.util.*;
 

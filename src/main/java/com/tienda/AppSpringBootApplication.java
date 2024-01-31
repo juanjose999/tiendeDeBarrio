@@ -1,33 +1,33 @@
 package com.tienda;
 
-import com.tienda.model.CsvReader;
-import com.tienda.model.Producto;
-import com.tienda.service.ProductServiceImplement;
+import com.tienda.model.csvreader.CsvReader;
+import com.tienda.model.product.Producto;
+import com.tienda.service.product.ProductServiceImplement;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
-//crear un sistema de objetos que nos permita cargar obtos typo producto
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+@SpringBootApplication
+public class AppSpringBootApplication implements CommandLineRunner {
 
-    public  static Scanner scanner = new Scanner(System.in);
-    public static List<Producto> productosLeidos = null;
-    public static ProductServiceImplement productServiceImplement;
+    private static Scanner scanner = new Scanner(System.in);
+    private static List<Producto> productosLeidos = null;
+    private static ProductServiceImplement productServiceImplement;
 
     public static void main(String[] args) {
-
+        SpringApplication.run(AppSpringBootApplication.class, args);
         try {
             CsvReader csvReader = new CsvReader();
             productosLeidos = csvReader.readProductsFromCsv("C:resources\\inventory.csv");
 
-        } catch (IOException  e) {
+        } catch (IOException e) {
             System.out.println("Error al leer el archivo CSV: " + e.getMessage());
         }
-        //arregloProductos.cargarProducts();
         productServiceImplement = new ProductServiceImplement(productosLeidos);
-
         runMenu();
     }
 
@@ -37,10 +37,10 @@ public class Main {
             displayMenu();
             choice = scanner.nextInt();
             handleUserChoice(choice, productServiceImplement);
-        }while (choice != 6);
+        } while (choice != 6);
     }
 
-    private static void displayMenu(){
+    private static void displayMenu() {
         System.out.println(
                 """
                         |o|                         /////////////\\\\\\
@@ -63,18 +63,22 @@ public class Main {
         System.out.println("6. Salir                                 |");
         System.out.println("±----------------------------------------±");
         System.out.print("   Ingresa tu opción:    (1 - 6)  ");
-
     }
 
-    public static void handleUserChoice(int choice, ProductServiceImplement productServiceImplement){
-        switch (choice){
+    public static void handleUserChoice(int choice, ProductServiceImplement productServiceImplement) {
+        switch (choice) {
             case 1 -> productServiceImplement.addProduct();
             case 2 -> productServiceImplement.deleteProduct();
             case 3 -> productServiceImplement.editProducts();
             case 4 -> productServiceImplement.allProducts();
             case 5 -> productServiceImplement.findById();
-            case 6 -> System.out.println("saliendo...");
-            default -> System.out.println("opcion invalida intente de nuevo");
+            case 6 -> System.out.println("Saliendo...");
+            default -> System.out.println("Opción inválida, intente de nuevo");
         }
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+
     }
 }
