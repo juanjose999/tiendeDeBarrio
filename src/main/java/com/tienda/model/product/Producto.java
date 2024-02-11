@@ -1,49 +1,53 @@
 package com.tienda.model.product;
 
-import java.util.Date;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class Producto {
-    private static int contadorProducto = 1;
-    private int identificadorProducto;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
+@Document(collection = "product")
+public class Producto implements Serializable {
+    private static long serialVersionUID= 1L;
+    @Id
+    private String idProduct;
     private String name;
     private String descripcion;
     private String categoria;
     private String etiqueta;
     private double precio;
     private String img;
-
-    private Date fechaCreacion;
+    private LocalDateTime fechaCreacion;
     private int stock;
 
+    public Producto(){
+
+    }
 
     public Producto( String name, String descripcion, String categoria, String etiqueta, double precio, String img) {
-        this.identificadorProducto = contadorProducto++;
         this.name = name;
         this.descripcion = descripcion;
         this.categoria = categoria;
         this.etiqueta = etiqueta;
         this.precio = precio;
         this.img = img;
-        this.fechaCreacion = new Date();
+        this.fechaCreacion = LocalDateTime.now();
     }
     //constructor con cantidad de stock
     public Producto( String name, String descripcion, String categoria, String etiqueta, double precio, int stock) {
-        this.identificadorProducto = contadorProducto++;
         this.name = name;
         this.descripcion = descripcion;
         this.categoria = categoria;
         this.etiqueta = etiqueta;
         this.precio = precio;
-        this.fechaCreacion = new Date();
+        this.fechaCreacion = LocalDateTime.now();
         this.stock = stock;
     }
 
-    public int getIdentificadorProducto(){
-        return identificadorProducto;
+    public String getIdentificadorProducto(){
+        return idProduct;
     }
-    public void setIdentificadorProducto(int identificadorProducto){
-        this.identificadorProducto = identificadorProducto;
-    }
+
     public String getName() {
         return name;
     }
@@ -128,20 +132,6 @@ public class Producto {
         } else {
             return "producto no disponible.";
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Producto{" +
-                "codigo del producto=" + identificadorProducto +
-                ", name='" + name + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", categoria='" + categoria + '\'' +
-                ", etiqueta='" + etiqueta + '\'' +
-                ", precio=" + precio +  // Corregir aquí: quitar el apóstrofe al final
-                ", fecha de creacion=" + fechaCreacion +
-                ", cantidad disponible=" + stock +
-                '}';
     }
 
 }

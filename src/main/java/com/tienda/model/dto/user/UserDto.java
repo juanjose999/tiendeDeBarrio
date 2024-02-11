@@ -1,37 +1,16 @@
-package com.tienda.model.user;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+package com.tienda.model.dto.user;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
-@Document(collection = "user")
-public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    private String id;
-    private LocalDateTime createdUser;
+public class UserDto {
     private String name;
     private String lastName;
     private String email;
     private String password;
 
-
-    public User(String name, String lastName, String email, String password) {
-        this.createdUser = LocalDateTime.now();
+    public UserDto(String name, String lastName, String email, String password) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-    }
-
-
-    public String getId() {
-        return id;
-    }
-
-    public LocalDateTime getCreatedUser() {
-        return createdUser;
     }
 
     public String getName() {
@@ -65,5 +44,4 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

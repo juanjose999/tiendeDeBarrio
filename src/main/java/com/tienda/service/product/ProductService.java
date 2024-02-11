@@ -1,14 +1,20 @@
 package com.tienda.service.product;
 
+import com.tienda.model.dto.product.ProductDto;
+import com.tienda.model.dto.product.ProductResponseDto;
+import com.tienda.model.product.Producto;
+
+import java.util.List;
+
 public interface ProductService {
-    void addProduct();
+    List<ProductResponseDto> getAllProduct();
 
-    void deleteProduct();
+    ProductResponseDto findProductById(String id);
 
-    void allProducts();
+    ProductResponseDto saveProduct(ProductDto productoDto);
 
-    void editProducts();
+    Boolean updateProduct(String id, ProductDto productDto);
 
-    void findById();
+    Boolean deleteProductById(String id);
 
 }
