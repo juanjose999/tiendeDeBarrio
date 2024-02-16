@@ -20,7 +20,7 @@ public class ProductDto {
         this.precio = precio;
         this.img = img;
         this.fechaCreacion = fechaCreacion;
-        this.stock = stock;
+        //this.stock = stock;
     }
 
     public String getName() {

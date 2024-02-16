@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
 @Service
 public class ProductServiceImplement implements ProductService {
 
@@ -17,9 +19,14 @@ public class ProductServiceImplement implements ProductService {
 
     @Override
     public List<ProductResponseDto> getAllProduct() {
-        List<ProductResponseDto> productResponseDtos = new ArrayList<>();
-        productRepository.getAllProduct().forEach(product -> productResponseDtos.add(ProductMapper.Product_To_ProductResponseDto(product)));
-        return productResponseDtos;
+        List<Producto> productList = productRepository.getAllProduct();
+        productList.forEach(producto -> {
+            // Log the 'producto' details
+            System.out.println("Product details: " + producto.toString());
+        });
+        return productList.stream()
+                .map(ProductMapper::Product_To_ProductResponseDto)
+                .collect(Collectors.toList());
     }
 
     @Override

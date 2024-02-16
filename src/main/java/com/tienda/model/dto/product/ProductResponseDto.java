@@ -1,7 +1,9 @@
 package com.tienda.model.dto.product;
 
-import java.time.LocalDateTime;
+import lombok.Data;
 
+import java.time.LocalDateTime;
+@Data
 public class ProductResponseDto {
     private String name;
     private String descripcion;
@@ -10,18 +12,7 @@ public class ProductResponseDto {
     private double precio;
     private String img;
     private LocalDateTime fechaCreacion;
-    private int stock;
 
-    public ProductResponseDto(String name, String descripcion, String categoria, String etiqueta, double precio, String img, LocalDateTime fechaCreacion, int stock) {
-        this.name = name;
-        this.descripcion = descripcion;
-        this.categoria = categoria;
-        this.etiqueta = etiqueta;
-        this.precio = precio;
-        this.img = img;
-        this.fechaCreacion = fechaCreacion;
-        this.stock = stock;
-    }
     public ProductResponseDto(String name, String descripcion, String categoria, String etiqueta, double precio, String img, LocalDateTime fechaCreacion) {
         this.name = name;
         this.descripcion = descripcion;
@@ -96,11 +87,4 @@ public class ProductResponseDto {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
 }

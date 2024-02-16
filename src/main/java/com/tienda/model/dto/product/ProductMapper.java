@@ -5,6 +5,9 @@ import com.tienda.model.product.Producto;
 public class ProductMapper {
 
     public static ProductResponseDto Product_To_ProductResponseDto(Producto producto){
+        if(producto==null){
+            return null;
+        }
         return new ProductResponseDto(
                 producto.getName(),
                 producto.getDescripcion(),

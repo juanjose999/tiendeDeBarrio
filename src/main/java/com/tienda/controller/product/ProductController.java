@@ -6,6 +6,7 @@ import com.tienda.model.product.Producto;
 import com.tienda.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +20,11 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ProductResponseDto>> getAllProduct(){
-        return new ResponseEntity<>(productService.getAllProduct(), HttpStatus.OK);
+        List<ProductResponseDto> response = productService.getAllProduct();
+        System.out.println("Response: " + response);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponseDto> findProductById(@PathVariable String idProduct){
