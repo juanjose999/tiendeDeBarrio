@@ -33,12 +33,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Boolean updateProduct(String id, Producto producto) {
         Producto foundProduct = findProductById(id);
         if(foundProduct != null){
-            foundProduct.setName(producto.getName());
+            foundProduct.setNombre(producto.getNombre());
             foundProduct.setDescripcion(producto.getDescripcion());
             foundProduct.setCategoria(producto.getCategoria());
-            foundProduct.setEtiqueta(producto.getEtiqueta());
+            foundProduct.setEtiquetas(producto.getEtiquetas());
             foundProduct.setPrecio(producto.getPrecio());
-            foundProduct.setImg(producto.getImg());
+            foundProduct.setUrlFoto(producto.getUrlFoto());
 
             productMongoRepository.save(foundProduct);
             return true;

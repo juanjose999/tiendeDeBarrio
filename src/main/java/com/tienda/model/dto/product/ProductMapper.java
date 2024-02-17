@@ -8,24 +8,27 @@ public class ProductMapper {
         if(producto==null){
             return null;
         }
+
         return new ProductResponseDto(
-                producto.getName(),
+                producto.getNombre(),
                 producto.getDescripcion(),
                 producto.getCategoria(),
-                producto.getEtiqueta(),
+                producto.getEtiquetas(),
                 producto.getPrecio(),
-                producto.getImg()
+                producto.getUrlFoto()
         );
     }
 
     public static Producto ProductDto_To_Product (ProductDto productDto){
+
+        double precio = (productDto.getPrecio() == 0) ? 0.0 : productDto.getPrecio();
         return new Producto(
-                productDto.getName(),
+                productDto.getNombre(),
                 productDto.getDescripcion(),
                 productDto.getCategoria(),
-                productDto.getEtiqueta(),
-                productDto.getPrecio(),
-                productDto.getImg()
+                productDto.getEtiquetas(),
+                precio,
+                productDto.getUrlFoto()
         );
     }
 

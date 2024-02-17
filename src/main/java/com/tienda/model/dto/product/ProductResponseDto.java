@@ -5,86 +5,71 @@ import lombok.Data;
 import java.time.LocalDateTime;
 @Data
 public class ProductResponseDto {
-    private String name;
-    private String descripcion;
-    private String categoria;
-    private String etiqueta;
-    private double precio;
-    private String img;
-    private LocalDateTime fechaCreacion;
+    private String Nombre;
+    private String Descripcion;
+    private String Categoria;
+    private String Etiquetas;
+    private double Precio;
+    private String UrlFoto;
 
-    public ProductResponseDto(String name, String descripcion, String categoria, String etiqueta, double precio, String img, LocalDateTime fechaCreacion) {
-        this.name = name;
-        this.descripcion = descripcion;
-        this.categoria = categoria;
-        this.etiqueta = etiqueta;
-        this.precio = precio;
-        this.img = img;
-        this.fechaCreacion = fechaCreacion;
-    }
-    public ProductResponseDto(String name, String descripcion, String categoria, String etiqueta, double precio, String img) {
-        this.name = name;
-        this.descripcion = descripcion;
-        this.categoria = categoria;
-        this.etiqueta = etiqueta;
-        this.precio = precio;
-        this.img = img;
+
+    public ProductResponseDto(String Nombre, String Descripcion, String Categoria, String Etiquetas, double Precio, String UrlFoto) {
+        this.Nombre = Nombre;
+        this.Descripcion = Descripcion;
+        this.Categoria = Categoria;
+        this.Etiquetas = Etiquetas;
+        this.Precio = Precio;
+        this.UrlFoto = UrlFoto;
     }
 
-    public String getName() {
-        return name;
+
+    public String getNombre() {
+        return Nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String name) {
+        this.Nombre = Nombre;
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return Descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
     }
 
     public String getCategoria() {
-        return categoria;
+        return Categoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategoria(String Categoria) {
+        this.Categoria = Categoria;
     }
 
-    public String getEtiqueta() {
-        return etiqueta;
+    public String getEtiquetas() {
+        return Etiquetas;
     }
 
-    public void setEtiqueta(String etiqueta) {
-        this.etiqueta = etiqueta;
+    public void setEtiquetas(String Etiquetas) {
+        this.Etiquetas = Etiquetas;
     }
 
     public double getPrecio() {
-        return precio;
+        return Precio;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setPrecio(double Precio) {
+        this.Precio = Precio;
     }
 
-    public String getImg() {
-        return img;
+    public String getUrlFoto() {
+        return UrlFoto;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setUrlFot(String UrlFot) {
+        this.UrlFoto = UrlFoto;
     }
 
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
 
 }
