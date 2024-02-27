@@ -10,9 +10,9 @@ public class ProductDto {
     private double Precio;
     private String UrlFoto;
     //private LocalDateTime fechaCreacion;
-    private int stock;
+    //private int stock;
 
-    public ProductDto(String Nombre, String Descripcion, String Categoria, String Etiquetas, double Precio, String UrlFoto,  int stock) {
+    public ProductDto(String Nombre, String Descripcion, String Categoria, String Etiquetas, double Precio, String UrlFoto) {
         this.Nombre = Nombre;
         this.Descripcion = Descripcion;
         this.Categoria = Categoria;
@@ -71,13 +71,4 @@ public class ProductDto {
         this.UrlFoto = UrlFoto;
     }
 
-
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
 }

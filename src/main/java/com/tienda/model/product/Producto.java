@@ -45,6 +45,10 @@ public class Producto implements Serializable {
         return idProduct;
     }
 
+    public void setIdProduct(String idProduct){
+        this.idProduct = idProduct;
+    }
+
     public String getNombre() {
         return Nombre;
     }
