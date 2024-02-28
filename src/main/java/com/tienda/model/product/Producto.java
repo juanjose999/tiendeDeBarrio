@@ -33,12 +33,14 @@ public class Producto implements Serializable {
         //this.fechaCreacion = LocalDateTime.now();
     }
     //constructor con cantidad de stock
-    public Producto( String Nombre, String Descripcion, String Categoria, String Etiquetas, double precio, int stock) {
+    public Producto( String idProduct,String Nombre, String Descripcion, String Categoria, String Etiquetas, double precio, String UrlFoto) {
+        this.idProduct = idProduct;
         this.Nombre = Nombre;
         this.Descripcion = Descripcion;
         this.Categoria = Categoria;
         this.Etiquetas = Etiquetas;
         this.Precio = Precio;
+        this.UrlFoto = UrlFoto;
     }
 
     public String getIdentificadorProducto(){

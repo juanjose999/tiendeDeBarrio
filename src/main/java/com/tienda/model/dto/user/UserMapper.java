@@ -6,6 +6,7 @@ public class UserMapper {
 
     public static UserResponseDto user_To_UserResponseDto(User user){
         return new UserResponseDto(
+                user.getId(),
                 user.getName(),
                 user.getLastName(),
                 user.getEmail(),

@@ -1,12 +1,13 @@
-package com.tienda.repository.product.mongo;
+package com.tienda.repository.product;
 
 import com.tienda.model.product.Producto;
-import com.tienda.model.user.User;
-import com.tienda.repository.product.ProductRepository;
+import com.tienda.repository.product.mongo.ProductMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
@@ -31,20 +32,22 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Boolean updateProduct(String id, Producto producto) {
-        Producto foundProduct = findProductById(id);
-        if(foundProduct != null){
-            foundProduct.setNombre(producto.getNombre());
-            foundProduct.setDescripcion(producto.getDescripcion());
-            foundProduct.setCategoria(producto.getCategoria());
-            foundProduct.setEtiquetas(producto.getEtiquetas());
-            foundProduct.setPrecio(producto.getPrecio());
-            foundProduct.setUrlFoto(producto.getUrlFoto());
+        Optional<Producto> foundProductOptional = Optional.ofNullable(findProductById(id));
+        if (foundProductOptional.isPresent()) {
+            Producto existingProduct = foundProductOptional.get();
+            existingProduct.setNombre(producto.getNombre());
+            existingProduct.setDescripcion(producto.getDescripcion());
+            existingProduct.setCategoria(producto.getCategoria());
+            existingProduct.setEtiquetas(producto.getEtiquetas());
+            existingProduct.setPrecio(producto.getPrecio());
+            existingProduct.setUrlFoto(producto.getUrlFoto());
 
-            productMongoRepository.save(foundProduct);
+            productMongoRepository.save(existingProduct);
             return true;
         }
-        return null;
+        return false;
     }
+
 
     @Override
     public Boolean deleteProductById(String id) {

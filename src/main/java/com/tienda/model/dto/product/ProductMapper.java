@@ -10,6 +10,7 @@ public class ProductMapper {
         }
 
         return new ProductResponseDto(
+                producto.getIdentificadorProducto(),
                 producto.getNombre(),
                 producto.getDescripcion(),
                 producto.getCategoria(),

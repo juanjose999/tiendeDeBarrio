@@ -1,4 +1,5 @@
 package com.tienda.model.user;
+import com.tienda.model.dto.user.UserDto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,10 +25,30 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
     }
+    public User(String id, String name, String lastName, String email, String password) {
+        this.id = id;
+        this.createdUser = LocalDateTime.now();
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(UserDto userDto) {
+        this.id = null;
+        this.name = userDto.getName();
+        this.lastName = userDto.getLastName();
+        this.email = userDto.getEmail();
+        this.password = getPassword();
+    }
 
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String idUser){
+        this.id = idUser;
     }
 
     public LocalDateTime getCreatedUser() {

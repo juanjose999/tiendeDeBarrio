@@ -1,4 +1,4 @@
-package com.tienda.controller.product;
+package com.tienda.controller;
 
 import com.tienda.model.dto.product.ProductDto;
 import com.tienda.model.dto.product.ProductResponseDto;
@@ -20,18 +20,19 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping()
     public ResponseEntity<List<ProductResponseDto>> getAllProduct(){
         List<ProductResponseDto> response = productService.getAllProduct();
         System.out.println("Response: " + response);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponseDto> findProductById(@PathVariable String idProduct){
-        try{
-            return new ResponseEntity<>(productService.findProductById(idProduct), HttpStatus.OK);
-        }catch (NoSuchElementException e){
-            return new ResponseEntity("the producto " + idProduct + "does't in the data base." , HttpStatus.NOT_FOUND);
+    public ResponseEntity<ProductResponseDto> findProductById(@PathVariable String id){
+        try {
+            ProductResponseDto responseDto = productService.findProductById(id);
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -55,7 +56,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{idProduct}")
-    public ResponseEntity<Boolean> deleteProduct(@PathVariable String productId){
-        return new ResponseEntity<>(productService.deleteProductById(productId), HttpStatus.OK);
+    public ResponseEntity<Boolean> deleteProduct(@PathVariable String idProduct){
+        return new ResponseEntity<>(productService.deleteProductById(idProduct), HttpStatus.OK);
     }
 }

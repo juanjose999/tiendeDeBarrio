@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/user")
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserResponseDto> findUserById(@PathVariable  String userId){
+    public ResponseEntity<Optional<UserResponseDto>> findUserById(@PathVariable  String userId){
         try{
             return new ResponseEntity<>(userService.findUserById(userId),HttpStatus.OK);
         }catch (NoSuchElementException e){

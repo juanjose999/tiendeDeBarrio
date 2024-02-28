@@ -21,8 +21,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDto findUserById(String id) {
-        return UserMapper.user_To_UserResponseDto(userRepository.findUserById(id));
+    public Optional<UserResponseDto> findUserById(String id) {
+        UserResponseDto user = UserMapper.user_To_UserResponseDto(userRepository.findUserById(id));
+        return Optional.ofNullable(user);
     }
 
     @Override

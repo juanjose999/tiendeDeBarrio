@@ -1,4 +1,4 @@
-package com.tienda;
+package com.tienda.service;
 
 import com.tienda.model.dto.product.ProductDto;
 import com.tienda.model.dto.product.ProductResponseDto;
