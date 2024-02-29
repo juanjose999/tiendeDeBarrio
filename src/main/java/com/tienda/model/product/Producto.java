@@ -39,4 +39,6 @@ public class Producto implements Serializable {
         this.UrlFoto = UrlFoto;
     }
 
+    public Producto(){}
+
 }

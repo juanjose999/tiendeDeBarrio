@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+
 @Repository
 public class UserRepositoryImpl implements UserRepository {
     @Autowired
@@ -19,6 +21,21 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findUserById(String id) {
         return userMongoRespotory.findById(id).get();
+    }
+
+    @Override
+    public User createUser(User user) {
+        return userMongoRespotory.save(user);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        Optional<User> userFound = userMongoRespotory.findByEmail(email);
+        if (userFound.isPresent()){
+            return userFound;
+        }else {
+            return Optional.empty();
+        }
     }
 
     @Override

@@ -2,20 +2,38 @@ package com.tienda.controller.user;
 import com.tienda.model.dto.user.UserDto;
 import com.tienda.model.dto.user.UserResponseDto;
 import com.tienda.service.user.UserService;
+import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import static com.tienda.utils.Constants.ADMIN_ROLE;
+
 @RestController
 @RequestMapping("/v1/user")
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+        loadSampleUsers();
+    }
+
+    public void loadSampleUsers() {
+        LocalDate fecha = LocalDate.of(2024, 2, 22);
+        String fechaString = fecha.toString();
+        UserDto userEntity = new UserDto("Ada", " Lovelace", fecha, "ada@mail.com", "passw0rd");
+        userService.createUser(userEntity);
+        UserDto adminUserEntity = new UserDto("Ada", "Admin", fecha, "admin@mail.com", "passw0rd");
+        UserResponseDto userCreated = userService.createUser(adminUserEntity);
+    }
+
 
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> getAllUser(){
@@ -58,6 +76,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
+    @RolesAllowed(ADMIN_ROLE)
     public ResponseEntity<Boolean> deleteUser(@PathVariable String userId){
         return new ResponseEntity<>(userService.deleteUserById(userId), HttpStatus.OK);
     }

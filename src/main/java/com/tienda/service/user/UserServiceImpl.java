@@ -3,6 +3,8 @@ package com.tienda.service.user;
 import com.tienda.model.dto.user.UserDto;
 import com.tienda.model.dto.user.UserMapper;
 import com.tienda.model.dto.user.UserResponseDto;
+import com.tienda.model.user.RolesEnum;
+import com.tienda.model.user.User;
 import com.tienda.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,28 @@ public class UserServiceImpl implements UserService {
     public Optional<UserResponseDto> findUserById(String id) {
         UserResponseDto user = UserMapper.user_To_UserResponseDto(userRepository.findUserById(id));
         return Optional.ofNullable(user);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        User userFound = userRepository.findByEmail(email).get();
+        if (userFound != null){
+            return userFound;
+        }else {
+            return null;
+        }
+    }
+
+    @Override
+    public UserResponseDto createUser(UserDto userDto) {
+        return UserMapper.user_To_UserResponseDto(userRepository.createUser(UserMapper.userDto_To_User(userDto)));
+    }
+
+    @Override
+    public UserResponseDto createUserAdmin(UserDto userDto) {
+        User userAdmin = UserMapper.userDto_To_User(userDto);
+        userAdmin.addRole(RolesEnum.ADMIN);
+        return UserMapper.user_To_UserResponseDto(userRepository.createUser(userAdmin));
     }
 
     @Override

@@ -1,12 +1,11 @@
 package com.tienda.controller;
 
+import com.tienda.controller.product.ProductController;
 import com.tienda.model.dto.product.ProductResponseDto;
-import com.tienda.model.product.Producto;
 import com.tienda.service.product.ProductService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;

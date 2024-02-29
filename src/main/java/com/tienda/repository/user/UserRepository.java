@@ -9,6 +9,8 @@ public interface UserRepository {
     List<User> getAllUsers();
 
     User findUserById(String id);
+    Optional<User> findByEmail(String email);
+    User createUser(User user);
 
     User saveUser(User user);
 
