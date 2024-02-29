@@ -56,7 +56,7 @@ public class UserServiceTest {
     @Test
     void findUserById_returnUserResponseDto(){
         String idUser = "23";
-        User mokupUser = new User("Juan Jose", "sierra ortega","juan@gmail.com","anju00");
+        User mokupUser = new User("23","Juan Jose", "sierra ortega","juan@gmail.com","anju00");
         mokupUser.setId(idUser);
         when(userRepository.findUserById(idUser)).thenReturn(mokupUser);
         Optional<UserResponseDto> result = userServiceImpl.findUserById(idUser);

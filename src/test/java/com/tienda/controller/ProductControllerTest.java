@@ -66,7 +66,7 @@ class ProductControllerTest {
 
         mockMvc.perform(get("/v1/product/{id}", "1a"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is("1a")))
+                .andExpect(jsonPath("$.idProduct", is("1a")))
                 .andExpect(jsonPath("$.nombre", is("Papas fritas")))
                 .andExpect(jsonPath("$.descripcion", is("bolsa de papas fritas 30gr")))
                 .andExpect(jsonPath("$.categoria", is("Fritos")))

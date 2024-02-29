@@ -61,7 +61,7 @@ public class ProductServiceTest {
         ProductResponseDto result = productServiceImplement.findProductById(productId);
 
         assertNotNull(result);
-        assertEquals(productId, mockProduct.getIdentificadorProducto());
+        assertEquals(productId, mockProduct.getIdProduct());
     }
 
     @Test
